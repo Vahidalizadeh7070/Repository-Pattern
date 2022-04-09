@@ -1,0 +1,56 @@
+﻿@model RepositoryPattern.Data.ViewModels.BookViewModel
+
+@{
+    var title = Model == null ? "Details" : "Details of " + Model.Name;
+    ViewData["Title"] = title;
+
+}
+
+<h1 class="text-black">@title</h1>
+
+<div class="shadow col-md-6 offset-md-3 rounded-3">
+    <div class="p-3">
+        @if (Model == null)
+        {
+            <h3 class="text-center text-danger">@ViewBag.Message</h3>
+        }
+        else
+        {
+            <h4 class="text-secondary font-weight-lighter">You can see all information which is related with <small><b>@Model.Name</b></small></h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Author)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Subject)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Subject)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Model.ReleaseDate.ToString(" dddd, dd MMM yyy ")
+                </dd>
+            </dl>
+        }
+    </div>
+    <div class="pb-5">
+        @if (Model != null)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning rounded-3 ml-2 float-right">Edit</a>
+        }
+        <a asp-action="List" class="btn btn-secondary rounded-3 ml-2 float-right">Back to List</a>
+    </div>
+</div>
